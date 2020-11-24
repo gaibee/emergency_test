@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script src="js/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body class="bg-primary">
+
+		<div class="bg-light">
+			<img src="images/yonsei_dental.jpg" class="rounded m-2" width="300">
+		</div>
+        
+        <!-- 구술시험 폼 -->
+        <div class="shadow m-4 bg-light rounded">
+            <div class="p-2">
+                <H1 class="font-weight-bold">
+                구술시험
+                </H1>
+            </div>
+
+            <div class="p-1" id='talk_test'>
+                <button type="button" class="btn btn-success m-1" style='width:100px'>구술1</button>
+            </div>
+        </div>
+        
+        <!-- 실기시험 폼 -->
+        <div class="shadow m-4 bg-light rounded">
+            <div class="p-2">
+                <H1 class="font-weight-bold">
+                실기시험
+                </H1>
+            </div>
+
+            <div class="p-1" id='practical_test'>
+                <button type="button" class="btn btn-danger m-1" style='width:100px'>실기1</button>
+            </div>
+        </div>
+        
+        <!-- 데이터 전 송 폼 -->
+        <div>
+            <form method="post" id="submit_form" action="question.html">
+                <input type='hidden' id='question_type' value=''>
+                <input type='hidden' id='btn_value' value=''>
+            </form>
+        </div>
+	</body>
+    
+    
+    <script src="js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            var str_html = '';
+            
+            // 구술시험 버튼추가
+            for (var i = 1; i < 22; i++) {
+                var talk_test_btn = '<button type="button" class="btn btn-success m-1" id="talk_btn" style="width:100px">구술{}</button>';
+                var talk_test_btn_rep = talk_test_btn.replace('{}', i);
+                str_html = str_html + talk_test_btn_rep + '\n';
+            }
+            
+            $('#talk_test').html(str_html);
+            
+            // 구술시험 이벤트
+            $(document).on("click", "#talk_btn", function(){
+                var idx = $(this).index();
+                var type = 'talk'
+                
+                location.href="question.html?" + type + " : " + idx
+            });
+            
+            str_html = '';
+            
+            // 실기시험 버튼추가
+            for (var i = 1; i < 9; i++) {
+                var practical_test_btn = '<button type="button" class="btn btn-danger m-1" id="practical_btn" style="width:100px">실기{}</button>';
+                var practical_test_btn_rep = practical_test_btn.replace('{}', i);
+                str_html = str_html + practical_test_btn_rep + '\n';
+            }
+            
+            $('#practical_test').html(str_html);
+            
+            // 실기시험 이벤트
+            $(document).on("click", "#practical_btn", function(){
+                var idx = $(this).index();
+                var type = 'practical'
+                
+                location.href="question.html?" + type + " : " + idx
+            });
+
+        });
+    </script>
+</html>
